@@ -4,29 +4,13 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-    public BoxCollider2D collider;
-    public Rigidbody2D rb;
-
-    private float height;
-    private float scrollSpeed = -2f;
-
-    void Start()
-    {
-        collider = GetComponent<BoxCollider2D>();
-        rb = GetComponent<Rigidbody2D>();
-
-        height = collider.size.y;
-        collider.enabled = false;
-
-        rb.velocity = new Vector2(0, scrollSpeed);
-    }
+    public float backgroundSpeed;
 
     void Update()
     {
-        if (transform.position.y < -height)
+        if (GameObject.FindGameObjectWithTag("Player") != null)
         {
-            Vector2 resetPosition = new Vector2(0, height * 2f);
-            transform.position = (Vector2)transform.position + resetPosition;
+            transform.position += new Vector3(0, backgroundSpeed * Time.deltaTime, 0);
         }
     }
 }
